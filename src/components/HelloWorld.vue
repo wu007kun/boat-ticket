@@ -6,7 +6,7 @@
     <div class="time-container">
       <div class="time-scale">
         <div class="time-available-list">
-          <div class="time-available-item" 
+          <div class="time-available-item"
             v-for="item in boatAvailableTime" :key="item.time"
             :style="{left: item.pos + '%'}"></div>
         </div>
@@ -26,8 +26,15 @@
         @touchmove="timeSlideMoving"
         @touchend="timeSlideEnd">
         <div class="time-slider-picture">
-          <img :src="boatImg.sun" alt="">
-          <img :src="boatImg.moon" alt="">
+          <div class="sun-moon-container">
+            <div class="sun-container"
+              :style="{transform: sunTransform, opacity: sunOpacity}">
+              <img :src="boatImg.sun" alt="">
+            </div>
+            <div class="moon-container">
+              <img :src="boatImg.moon" alt="">
+            </div>
+          </div>
         </div>
         <div class="time-slider-time">
           {{ boatTime }}
@@ -155,7 +162,11 @@ export default {
           oriX: 0,
           oriY: 0
         }
-      }
+      },
+      sunTransform: '',
+      moonTransform: '',
+      sunOpacity: 1,
+      moonOpacity: 1
     }
   },
   watch: {
@@ -172,6 +183,11 @@ export default {
       let b = 230 - parseInt(Math.abs(val - slideMiddle) * blueStep)
       this.pageBackground = `rgb(${r}, ${g}, ${b})`
       this.boatPosition = this.slideToPosition(val)
+      let sunDeg = val / this.slideMax * 252
+      this.sunTransform = `translateX(calc(~"-50vw + 16px"))
+        rotate(${-1 * sunDeg}deg)
+        translateX(calc(~"45vw - 16px"))
+        rotate(${sunDeg}deg);`
     }
   },
   mounted () {
@@ -388,6 +404,27 @@ export default {
       height: calc(~"100% - 80px");
       .time-slider-picture {
         height: calc(~"100% - 20px");
+        .sun-moon-container {
+          position: relative;
+          width: 100vw;
+          height: 50vw;
+          .sun-container {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            transform-origin: 50% 50%;
+          }
+          .moon-container {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            transform-origin: 50% 50%;
+          }
+        }
       }
       .time-slider-time {
         height: 20px;
