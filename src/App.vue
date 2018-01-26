@@ -20,6 +20,11 @@ export default {
   width: 100%;
   height: 100%;
 }
+html * {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
+}
 html {
   width: 100%;
   height: 100%;
