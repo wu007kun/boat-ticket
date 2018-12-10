@@ -12,9 +12,8 @@
           <p>{{item.scenic[0]}}&emsp;-&emsp;{{item.scenic[1]}}</p>
         </div>
       </div>
-      <div class="history-list-divider"></div>
+      <div v-show="historyList.length > 4" class="history-list-divider"></div>
     </div>
-    <div class="history-list-divider"></div>
     <div class="history-footer">
       <div class="footer-btn" @click="toBuyTicket"><img :src="boatImg.boat" alt=""></div>
     </div>
