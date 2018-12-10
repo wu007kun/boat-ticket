@@ -55,13 +55,12 @@ export default {
       width: 100%;
       height: 10%;
       line-height: 10vh;
-      font-size: 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       img {
-        width: 36px;
-        height: 36px;
+        width: 60px;
+        height: 60px;
       }
     }
     .history-list {
@@ -83,7 +82,6 @@ export default {
         }
         .history-list-item {
           height: 12vh;
-          font-size: 20px;
           p {
             text-align: left;
             display: flex;
@@ -97,8 +95,8 @@ export default {
         position: absolute;
         bottom: 25px;
         right: 25px;
-        width: 42px;
-        height: 42px;
+        width: 80px;
+        height: 80px;
         img {
           width: 100%;
           height: 100%;
