@@ -91,7 +91,10 @@
       <div class="picker">
         <div class="picker-section">
           <div class="picker-item"
-            :class="{'active-item': from === item}"
+            :class="{
+              'active-item': from === item,
+              'disabled-item': to === item
+            }"
             v-for="(item, index) in pickerSlots"
             :key="index"
             @click="setFrom(item)">
@@ -101,7 +104,10 @@
         <img src="~@/assets/img/arrow.png" alt="">
         <div class="picker-section">
           <div class="picker-item"
-            :class="{'active-item': to === item}"
+            :class="{
+              'active-item': to === item,
+              'disabled-item': from === item
+            }"
             v-for="(item, index) in pickerSlots"
             :key="index"
             @click="setTo(item)">
@@ -174,25 +180,6 @@ export default {
       wave2: 'rgba(23, 45, 67, 0.6)',
       waveHeight: 100,
       pickerSlots: ['椒江区', '一江山岛', '上大陈', '下大陈'],
-      scenicPickerSlots: [
-        {
-          flex: 1,
-          values: ['椒江区', '一江山岛', '上大陈', '下大陈'],
-          className: 'scenic-slot1',
-          textAlign: 'right'
-        }, {
-          divider: true,
-          content: '→',
-          className: 'scenic-slot2'
-        }, {
-          flex: 1,
-          values: ['椒江区', '一江山岛', '上大陈', '下大陈'],
-          className: 'scenic-slot3',
-          textAlign: 'left',
-          defaultIndex: 1
-        }
-      ],
-      scenicPickerValue: [],
       record: [],
       from: '椒江区',
       to: '上大陈'
@@ -367,9 +354,6 @@ export default {
     checkTourist (n) {
       this.touristTransform += (n - 5) * 100
     },
-    scenicPickerChange (picker, values) {
-      this.scenicPickerValue = values
-    },
     confirmBoatTicket () {
       let time = this.slideToTime(this.slideDistance)
       let date = this.boatDate[this.dateIndex]
@@ -420,7 +404,7 @@ export default {
         .time-available-item {
           position: absolute;
           top: 16px;
-          width: 2px;
+          width: 4px;
           height: 16px;
           margin-left: -1px;
           background-color: #fff;
@@ -548,6 +532,9 @@ export default {
         }
         .active-item {
           background-color: #0B96D9;
+        }
+        .disabled-item {
+          color: #aaa;
         }
       }
       img {
